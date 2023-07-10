@@ -7,6 +7,7 @@ import logging
 import sys
 import vertexai
 from vertexai.language_models import TextGenerationModel
+import time
 
 # Load .env file
 dotenv_path = os.path.join(os.path.dirname(__file__), '../config/.env')
@@ -55,6 +56,7 @@ class SentimentAnalyzer:
             if headline is not None and stock_name is not None and ticker is not None:
                 logging.info(f"Processing article: {headline}")
                 sentiment = self.analyze_sentiment(headline)
+                time.sleep(1.1)  # Sleep for 1.1 seconds coz Text-bison quota of 60 queries for minute only
                 if sentiment is not None:
                     sentiment = sentiment.strip()
                     if sentiment.startswith('YES'):
